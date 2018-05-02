@@ -10,16 +10,17 @@ public class Main {
         System.out.println("1");
         DatabaseReference db;
         db = FirebaseDatabase.getInstance().getReference();
-
-        DatabaseReference farmerRef = db.child("Farmers");
+        DatabaseReference farmerRef = db;
+        //DatabaseReference farmerRef = db.child("Farmers");
 
         Map<String, Farmers> farmers = new HashMap<>();
         farmerRef.child("grace69").setValueAsync(new Farmers("Aji No Moto", "China", "Grace Tan Wei Loon", "grace69lol", "grace69"));
-        //farmers.put("grace69", new Farmers("Aji No Moto", "China", "Grace Tan Wei Loon", "grace69lol", "grace69"));
+        farmers.put("grace696", new Farmers("Aji No Moto", "China", "Grace Tan Wei Loon", "grace69lol", "grace696"));
 
         farmerRef.setValueAsync(farmers);
 
         System.out.println("2");
+
         farmerRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {

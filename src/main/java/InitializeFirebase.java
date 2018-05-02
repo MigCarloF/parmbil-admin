@@ -9,20 +9,31 @@ import com.google.firebase.auth.FirebaseCredentials;
 import com.google.firebase.database.*;
 
 public class InitializeFirebase {
-    public static final String DatabaseURL = "https://parmbil-5557d.firebaseio.com";
+    public static final String DatabaseURL = "https://parmbil-5557d.firebaseio.com/";
 
     public static void initializeDB() {
-        FileInputStream serviceAccount = null;
-        FirebaseOptions options = null;
         try {
-
-            serviceAccount = new FileInputStream("parmbil-5557d-firebase-adminsdk-42mad-248bbbfff8.json");
-            options = new FirebaseOptions.Builder()
+            FileInputStream serviceAccount = new FileInputStream("parmbil-5557d-firebase-adminsdk-42mad-248bbbfff8.json");
+            FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .setDatabaseUrl(DatabaseURL)
                     .build();
 
             FirebaseApp.initializeApp(options);
+
+            DatabaseReference ref = FirebaseDatabase.getInstance()
+                    .getReference("restricted_access/secret_document");
+            ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Object document = dataSnapshot.getValue();
+                    System.out.println(document);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                }
+            });
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
