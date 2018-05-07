@@ -13,9 +13,9 @@ public class InitializeFirebase {
 
     public static void initializeDB() {
         try {
-            FileInputStream serviceAccount = new FileInputStream("parmbil-5557d-firebase-adminsdk-42mad-248bbbfff8.json");
+            FileInputStream refreshToken  = new FileInputStream("parmbil-5557d-firebase-adminsdk-42mad-248bbbfff8.json");
             FirebaseOptions options = new FirebaseOptions.Builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .setCredentials(GoogleCredentials.fromStream(refreshToken))
                     .setDatabaseUrl(DatabaseURL)
                     .build();
 

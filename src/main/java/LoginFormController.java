@@ -12,13 +12,13 @@ public class LoginFormController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         db = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference farmerRef = db.child("Farmers");
+        DatabaseReference farmerRef = db.child("Farmer");
 
         farmerRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot snap : snapshot.getChildren()) {
-                    Farmers farmer = snap.getValue(Farmers.class);
+                    Farmer farmer = snap.getValue(Farmer.class);
                     System.out.println(farmer.getName());
                 }
             }

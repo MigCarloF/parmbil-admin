@@ -11,6 +11,7 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile 'com.google.firebase:firebase-admin:5.10.0'
+    //compile 'com.google.firebase:firebase-admin:5.3.1'
+    implementation 'com.google.firebase:firebase-admin:5.11.0'
     compile 'com.jfoenix:jfoenix:1.9.0'
 }
