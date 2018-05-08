@@ -14,4 +14,5 @@ dependencies {
     //compile 'com.google.firebase:firebase-admin:5.3.1'
     implementation 'com.google.firebase:firebase-admin:5.11.0'
     compile 'com.jfoenix:jfoenix:1.9.0'
+    testCompile group: 'org.slf4j', name: 'slf4j-nop', version: '1.7.21'
 }

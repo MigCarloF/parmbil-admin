@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-
+private int chilren = 0;
     public static void main(String[] args) {
         InitializeFirebase.initializeDB();
         launch(args);
@@ -23,6 +23,7 @@ public class Main extends Application {
         Scene scene = new Scene(layout, 300, 250);
         primaryStage.setScene(scene);
         primaryStage.show();
+
         setupGuy();
     }
 
@@ -33,19 +34,16 @@ public class Main extends Application {
         //DatabaseReference farmerRef = db;
         DatabaseReference farmerRef = db.child("Farmers");
 
-       // farmerRef.child("admin").setValue(new Admin("admin2", "admin", "Admin Man", true));
+        farmerRef.child("justice").setValueAsync(new Farmer("Steek", "kiosk", "Justice De la Vida", "fhel", "justice"));
 
         System.out.println("2");
 
         farmerRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChildName) {
-//                System.out.println("11");
-//                System.out.println(snapshot.exists());
-//                Farmer farmer = snapshot.getValue(Farmer.class);
-//                System.out.println("12");
-//                //System.out.println(farmer);
-//                System.out.println("13");
+                Farmer farmer = snapshot.getValue(Farmer.class);
+                System.out.println("Child");
+                System.out.println(farmer.getName());
             }
 
             @Override
@@ -65,27 +63,9 @@ public class Main extends Application {
 
             @Override
             public void onCancelled(DatabaseError error) {
-                System.out.println("Fail");
+                System.out.println("Fail" + error.getCode());
             }
         });
-//
-//        farmerRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot snapshot) {
-//                System.out.println("3");
-//                for (DataSnapshot snap : snapshot.getChildren()) {
-//                    Farmer farmer = snap.getValue(Farmer.class);
-//                    System.out.println("Good!");
-//                    System.out.println(farmer.getName());
-//                }
-//                System.out.println("4");
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError error) {
-//
-//            }
-//        });
 
     }
 }
