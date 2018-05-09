@@ -1,13 +1,15 @@
 import com.google.firebase.database.*;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.net.URL;
 
 public class Main extends Application {
 
-private int chilren = 0;
     public static void main(String[] args) {
         InitializeFirebase.initializeDB();
         launch(args);
@@ -16,15 +18,22 @@ private int chilren = 0;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Parmbil Admin");
-
-        StackPane layout = new StackPane();
-
-        Scene scene = new Scene(layout, 300, 250);
+        File f = new File("src/main/java/hi.txt");
+        f.getParentFile().mkdirs();
+        f.createNewFile();
+        URL url = getClass().getResource("LoginForm.fxml");
+        Parent root = FXMLLoader.load(url);
+        primaryStage.setTitle("Cebu South Bus Terminal");
+        Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+//        primaryStage.setTitle("Parmbil Admin");
+//        StackPane layout = new StackPane();
+//        Scene scene = new Scene(layout, 300, 250);
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
 
-        setupGuy();
+        //setupGuy();
     }
 
     private void setupGuy() {

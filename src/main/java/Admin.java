@@ -1,33 +1,26 @@
+import java.util.StringTokenizer;
+
 public class Admin {
-    public String username;
-    public String password;
-    public String name;
     public boolean active;
+    public String name;
+    public String password;
+    public String username;
 
-    public Admin(String username, String password, String name, boolean active){
-        this.username = username;
-        this.password = password;
-        this.name = name;
+    public Admin(boolean active, String name, String password, String username){
         this.active = active;
-    }
-
-
-    //Getters and setters
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
+        this.name = name;
+        this.password = password;
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public Admin() {}
+
+    public boolean getActive() {
+        return active;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public String getName() {
@@ -38,11 +31,22 @@ public class Admin {
         this.name = name;
     }
 
-    public boolean isActive() {
-        return active;
+    public String getPassword() {
+        return password;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+//Getters and setters
+
 }
