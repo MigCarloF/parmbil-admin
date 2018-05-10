@@ -26,6 +26,7 @@ public class Main extends Application {
         primaryStage.setTitle("Cebu South Bus Terminal");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
 //        primaryStage.setTitle("Parmbil Admin");
 //        StackPane layout = new StackPane();

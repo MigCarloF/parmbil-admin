@@ -1,0 +1,20 @@
+.root {
+    -fx-font-family:'Open Sans', sans-serif;
+}
+.button {
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: #e1edb8;
+    -fx-font-size: 1em; /* 12 */
+    -fx-text-fill: #000000;
+}
+.button:hover{
+    -fx-background-color: #dbe8b0;
+}
+.button:pressed{
+    -fx-background-color: #dbe8b0;
+}
+#tableColumn {
+    -fx-color: #d3e1ac;
+    -fx-border-color: #efefef;
+}

@@ -2,12 +2,14 @@ import java.util.StringTokenizer;
 
 public class Admin {
     public boolean active;
+    public boolean master;
     public String name;
     public String password;
     public String username;
 
-    public Admin(boolean active, String name, String password, String username){
+    public Admin(boolean active, boolean master, String name, String password, String username){
         this.active = active;
+        this.master = master;
         this.name = name;
         this.password = password;
         this.username = username;
@@ -21,6 +23,14 @@ public class Admin {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public boolean getMaster() {
+        return master;
+    }
+
+    public void setMaster(boolean master) {
+        this.master = master;
     }
 
     public String getName() {
@@ -47,6 +57,6 @@ public class Admin {
         this.username = username;
     }
 
-//Getters and setters
+    //Getters and setters
 
 }

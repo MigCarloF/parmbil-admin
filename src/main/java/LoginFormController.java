@@ -1,11 +1,18 @@
 import com.google.firebase.database.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -23,7 +30,7 @@ public class LoginFormController implements Initializable {
     @FXML
     private TextField username;
     @FXML
-    private TextField password;
+    private PasswordField password;
     @FXML
     private Button login;
     @FXML
@@ -33,46 +40,84 @@ public class LoginFormController implements Initializable {
     private Lock lock = new ReentrantLock();
     private Condition cond = lock.newCondition();
 
-    public void loginPressed(ActionEvent e) {
+    public void loginPressed(ActionEvent e) throws IOException {
+
+
         if (username.getText() == null) {
             username.setText("");
         } else if (password.getText() == null) {
             password.setText("");
         }
 
-        db.equalTo(username.getText()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                lock.lock();
-                if (snapshot.exists()) {
-                    userExists = true;
-                    Admin admin = snapshot.getValue(Admin.class);
-                    currentAdmin = admin;
-                } else {
-                    userExists = false;
-                    System.out.println("NO :(");
-                }
-                cond.signal();
-                lock.unlock();
-            }
+        //db.orderByChild("username").equalTo(username.getText()).addListenerForSingleValueEvent(new ValueEventListener() {
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-
-            }
-        });
-
-        boolean loginSuccessful = false;
-        if(currentAdmin != null) {
-            if (currentAdmin.getUsername().equals(username.getText()) && currentAdmin.getPassword().equals(password.getText())) {
-                loginSuccessful = true;
-            }
-        }
-
-        if (loginSuccessful) {
-            System.out.println("LOGIN!");
+        //gets username from textfield and gets the exact username to match
+        //gets the matched username and moves matched Admin to currentAdmin to compare later on
+        if (!NetChecker.netIsAvailable()) {
+            infoLabel.setText("Check Internet Connection");
         } else {
-            infoLabel.setText("Invalid credentials");
+            db.orderByChild("username").equalTo(username.getText()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    lock.lock();
+                    if (snapshot.getValue() != null) {
+                        for (DataSnapshot snap : snapshot.getChildren()) {
+                            userExists = true;
+                            Admin admin = snap.getValue(Admin.class);
+//                        System.out.println(admin.getUsername());
+//                        System.out.println(admin.getPassword());
+//                        System.out.println(admin.getName());
+                            currentAdmin = admin;
+                        }
+                    } else {
+                        userExists = false;
+                        System.out.println("NO :(");
+                    }
+                    cond.signal();
+                    lock.unlock();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+
+                }
+            });
+
+            //syncs code with snapshot
+            lock.lock();
+            try {
+                infoLabel.setText("Please wait...");
+                cond.await();
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            lock.unlock();
+
+            boolean loginSuccessful = false;
+
+            //compares currentAdmin from the listener a while ago
+            if (currentAdmin != null) {
+                if (currentAdmin.getUsername().equals(username.getText()) && currentAdmin.getPassword().equals(password.getText()) && currentAdmin.getActive()) {
+                    loginSuccessful = true;
+                }
+            }
+
+            //Login logic here
+            if (loginSuccessful) {
+                System.out.println("Login Successful");
+                infoLabel.setText("");
+                Parent adminFormParent = FXMLLoader.load(getClass().getResource("AdminFormFarmer.fxml"));
+                Scene adminFormScene= new Scene(adminFormParent);
+
+                //This line gets the Stage information
+                Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                window.setResizable(false);
+                window.setScene(adminFormScene);
+                window.show();
+
+            } else {
+                infoLabel.setText("Invalid credentials");
+            }
         }
         currentAdmin = null;
         username.setPromptText("Username");
