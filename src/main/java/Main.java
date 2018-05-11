@@ -18,12 +18,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        File f = new File("src/main/java/hi.txt");
-        f.getParentFile().mkdirs();
-        f.createNewFile();
         URL url = getClass().getResource("LoginForm.fxml");
         Parent root = FXMLLoader.load(url);
-        primaryStage.setTitle("Cebu South Bus Terminal");
+        primaryStage.setTitle("Parmbil Admin Applet");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);

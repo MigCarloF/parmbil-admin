@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@adminsheet.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AdminFormAdminController">
+   <children>
+      <TableView fx:id="tableAdmin" layoutX="180.0" layoutY="95.0" prefHeight="468.0" prefWidth="580.0" stylesheets="@adminsheet.css">
+        <columns>
+            <TableColumn id="tableColumn" fx:id="colName" minWidth="230.0" prefWidth="113.0" text="Name" />
+          <TableColumn id="tableColumn" fx:id="colUsername" minWidth="230.0" prefWidth="52.0" styleClass="tableColumn" text="Username" />
+            <TableColumn id="tableColumn" fx:id="colActive" minWidth="116.0" prefWidth="85.0" text="Active" />
+        </columns>
+      </TableView>
+      <ImageView fitHeight="82.0" fitWidth="275.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@parmbil2.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnLogout" layoutX="666.0" layoutY="6.0" mnemonicParsing="false" onAction="#logoutPressed" prefHeight="82.0" prefWidth="94.0" text="Logout" />
+      <VBox alignment="TOP_CENTER" layoutX="8.0" layoutY="130.0" prefHeight="352.0" prefWidth="167.0" spacing="10.0">
+         <children>
+            <Button fx:id="btnFarmers" mnemonicParsing="false" onAction="#farmerPressed" prefHeight="32.0" prefWidth="158.0" text="Farmers" />
+            <Button fx:id="btnFarmerAdd" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Add" />
+            <Button fx:id="btnFarmerEdit" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Edit" />
+            <Button fx:id="btnFarmerDelete" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Delete" />
+            <Button fx:id="btnAdmin" mnemonicParsing="false" prefHeight="32.0" prefWidth="158.0" text="Admin" />
+            <Button fx:id="btnAdminAdd" mnemonicParsing="false" onAction="#addPressed" prefHeight="25.0" prefWidth="82.0" text="Add" />
+            <Button fx:id="btnAdminEdit" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Edit" />
+            <Button fx:id="btnAdminDelete" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Delete" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

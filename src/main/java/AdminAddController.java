@@ -8,12 +8,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class FarmerAddController implements Initializable {
-
+public class AdminAddController implements Initializable {
     DatabaseReference db;
 
     @FXML
@@ -22,10 +20,6 @@ public class FarmerAddController implements Initializable {
     private TextField textPassword;
     @FXML
     private TextField textName;
-    @FXML
-    private TextField textLocation;
-    @FXML
-    private TextField textFavCrop;
     @FXML
     private Button btnCancel;
     @FXML
@@ -40,23 +34,17 @@ public class FarmerAddController implements Initializable {
             textPassword.setText("");
         if(textName.getText() == null)
             textName.setText("");
-        if(textLocation.getText() == null)
-            textLocation.setText("");
-        if(textFavCrop.getText() == null)
-            textFavCrop.setText("");
 
-        if (textUsername.getText().equals("") || textPassword.getText().equals("") || textName.getText().equals("") || textLocation.getText().equals("")|| textFavCrop.getText().equals("")){
+        if (textUsername.getText().equals("") || textPassword.getText().equals("") || textName.getText().equals("")){
             lblError.setText("Incomplete Data");
         } else {
-            String username, password, name, location, favCrop;
+            String username, password, name;
             username = textUsername.getText();
             password = textPassword.getText();
             name = textName.getText();
-            location = textLocation.getText();
-            favCrop = textFavCrop.getText();
 
-            Farmer farmer = new Farmer(favCrop, location, name, password, username);
-            db.child(username).setValueAsync(farmer);
+            Admin admin = new Admin(true, false, name, password,username);
+            db.child(username).setValueAsync(admin);
 
             Stage stage = (Stage) btnOk.getScene().getWindow();
             stage.close();
@@ -70,7 +58,7 @@ public class FarmerAddController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        db = FirebaseDatabase.getInstance().getReference().child("Farmers");
+        db = FirebaseDatabase.getInstance().getReference().child("Admin");
         lblError.setText("");
 
     }
