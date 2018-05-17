@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="349.0" prefWidth="534.0" stylesheets="@adminsheet.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FarmerAddController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="349.0" prefWidth="534.0" stylesheets="@adminsheet.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AdminAddController">
    <children>
       <HBox layoutX="67.0" layoutY="39.0" prefHeight="266.0" prefWidth="406.0">
          <children>
@@ -23,12 +23,8 @@
                   <Label fx:id="lblError" text="Label" textFill="RED" />
                </children>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="300.0" spacing="15.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0" spacing="15.0">
                <children>
-                  <Label text="Location" />
-                  <TextField fx:id="textLocation" />
-                  <Label text="Favorite Crop" />
-                  <TextField fx:id="textFavCrop" />
                   <Button fx:id="btnOk" mnemonicParsing="false" onAction="#okPressed" prefHeight="27.0" prefWidth="93.0" text="OK">
                      <VBox.margin>
                         <Insets top="10.0" />

@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.xml.crypto.Data;
@@ -78,6 +79,19 @@ public class AdminFormAdminController implements Initializable {
             }
         });
     }
+
+    public void addPressed(ActionEvent event) throws IOException {
+        Parent adminFormParent = FXMLLoader.load(getClass().getResource("AdminAdd.fxml"));
+        Scene adminFormScene= new Scene(adminFormParent);
+
+        //This line gets the Stage information
+        Stage window = new Stage();
+        window.setResizable(false);
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setScene(adminFormScene);
+        window.showAndWait();
+    }
+
     public void logoutPressed(ActionEvent event) throws IOException {
 
         loadWindow(event, "LoginForm.fxml");
