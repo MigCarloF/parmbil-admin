@@ -105,6 +105,7 @@ public class LoginFormController implements Initializable {
             //Login logic here
             if (loginSuccessful) {
                 System.out.println("Login Successful");
+                SingletonLogin.getInstance().setCurrentLogin(currentAdmin);
                 infoLabel.setText("");
                 Parent adminFormParent = FXMLLoader.load(getClass().getResource("AdminFormFarmer.fxml"));
                 Scene adminFormScene= new Scene(adminFormParent);
@@ -126,6 +127,7 @@ public class LoginFormController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        SingletonLogin.getInstance().setCurrentLogin(null);
         infoLabel.setText("");
         db = FirebaseDatabase.getInstance().getReference().child("Admin");
         adminList = new ArrayList<>();

@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -32,11 +33,16 @@ public class AdminFormAdminController implements Initializable {
     private TableColumn<Admin, String> colUsername;
     @FXML
     private TableColumn<Admin, String> colActive;
+    @FXML
+    private Label lblUser;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         db = FirebaseDatabase.getInstance().getReference().child("Admin");
-
+        lblUser.setText("");
+        if(SingletonLogin.getInstance().getCurrentLogin() != null){
+            lblUser.setText(SingletonLogin.getInstance().getCurrentLogin().name);
+        }
         initTable();
     }
 

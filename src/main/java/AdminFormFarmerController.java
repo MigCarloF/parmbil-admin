@@ -8,11 +8,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,19 +38,23 @@ public class AdminFormFarmerController implements Initializable {
     private TableColumn<Farmer, String> colLocation;
     @FXML
     private TableColumn<Farmer, String> colFavCrop;
-
+    @FXML
+    private Label lblUser;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         db = FirebaseDatabase.getInstance().getReference().child("Farmers");
-
+        lblUser.setText("");
+        if (SingletonLogin.getInstance().getCurrentLogin() != null) {
+            lblUser.setText(SingletonLogin.getInstance().getCurrentLogin().name);
+        }
         initTable();
 
     }
 
-    public void initTable(){
+    public void initTable() {
         farmers = FXCollections.observableArrayList();
         colName.setCellValueFactory(new PropertyValueFactory<Farmer, String>("name"));
         colUsername.setCellValueFactory(new PropertyValueFactory<Farmer, String>("username"));
@@ -59,9 +66,7 @@ public class AdminFormFarmerController implements Initializable {
         db.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChildName) {
-                System.out.println("hey");
                 Farmer farmer = snapshot.getValue(Farmer.class);
-                System.out.println("lol");
                 farmers.add(farmer);
                 tableFarmer.setItems(farmers);
             }
@@ -88,10 +93,33 @@ public class AdminFormFarmerController implements Initializable {
         });
     }
 
+    public void editPressed(ActionEvent event) throws IOException {
+        if (tableFarmer.getSelectionModel().getSelectedCells().isEmpty()) {
+            System.out.println("No farmer selected!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No farmer selected.");
+            alert.setContentText("Please select a farmer profile to edit.");
+            alert.showAndWait();
+        } else{
+            Stage window = new Stage();
+            Farmer editFarmer = tableFarmer.getSelectionModel().getSelectedItem();
+            SingletonEditFarmer.getInstance().setFarmer(editFarmer);
+
+            FXMLLoader anotherLoader = new FXMLLoader(getClass().getResource("FarmerEdit.fxml"));
+            Parent anotherRoot = anotherLoader.load();
+            Scene anotherScene = new Scene(anotherRoot);
+            window.setResizable(false);
+            window.initModality(Modality.APPLICATION_MODAL);
+            window.setScene(anotherScene);
+            window.showAndWait();
+        }
+    }
+
+
     public void addPressed(ActionEvent event) throws IOException {
         Parent adminFormParent = FXMLLoader.load(getClass().getResource("FarmerAdd.fxml"));
-        Scene adminFormScene= new Scene(adminFormParent);
-
+        Scene adminFormScene = new Scene(adminFormParent);
         //This line gets the Stage information
         Stage window = new Stage();
         window.setResizable(false);
@@ -99,6 +127,7 @@ public class AdminFormFarmerController implements Initializable {
         window.setScene(adminFormScene);
         window.showAndWait();
     }
+
     public void logoutPressed(ActionEvent event) throws IOException {
 
         loadWindow(event, "LoginForm.fxml");
@@ -114,7 +143,7 @@ public class AdminFormFarmerController implements Initializable {
     }
 
 
-    public void adminPressed(ActionEvent event) throws IOException{
+    public void adminPressed(ActionEvent event) throws IOException {
         loadWindow(event, "AdminFormAdmin.fxml");
 //        Parent adminFormParent = FXMLLoader.load(getClass().getResource("LoginForm.fxml"));
 //        Scene adminFormScene= new Scene(adminFormParent);
@@ -126,9 +155,9 @@ public class AdminFormFarmerController implements Initializable {
 //        window.show();
     }
 
-    private void loadWindow(ActionEvent event, String name) throws IOException{
+    private void loadWindow(ActionEvent event, String name) throws IOException {
         Parent adminFormParent = FXMLLoader.load(getClass().getResource(name));
-        Scene adminFormScene= new Scene(adminFormParent);
+        Scene adminFormScene = new Scene(adminFormParent);
 
         //This line gets the Stage information
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@adminsheet.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AdminFormFarmerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@adminsheet.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AdminFormFarmerController">
    <children>
       <TableView fx:id="tableFarmer" layoutX="180.0" layoutY="95.0" prefHeight="468.0" prefWidth="580.0" stylesheets="@adminsheet.css">
         <columns>
@@ -29,7 +31,7 @@
          <children>
             <Button fx:id="btnFarmers" mnemonicParsing="false" prefHeight="32.0" prefWidth="158.0" text="Farmers" />
             <Button fx:id="btnFarmerAdd" mnemonicParsing="false" onAction="#addPressed" prefHeight="25.0" prefWidth="82.0" text="Add" />
-            <Button fx:id="btnFarmerEdit" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Edit" />
+            <Button fx:id="btnFarmerEdit" mnemonicParsing="false" onAction="#editPressed" prefHeight="25.0" prefWidth="82.0" text="Edit" />
             <Button fx:id="btnFarmerDelete" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Delete" />
             <Button fx:id="btnAdmin" mnemonicParsing="false" onAction="#adminPressed" prefHeight="32.0" prefWidth="158.0" text="Admin" />
             <Button fx:id="btnAdminAdd" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Add" />
@@ -37,5 +39,10 @@
             <Button fx:id="btnAdminDelete" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Delete" />
          </children>
       </VBox>
+      <StackPane layoutX="455.0" layoutY="24.0" prefHeight="46.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="lblUser" text="Label" />
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>
