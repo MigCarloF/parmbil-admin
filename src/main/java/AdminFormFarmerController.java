@@ -57,11 +57,11 @@ public class AdminFormFarmerController implements Initializable {
 
     public void initTable() {
         farmers = FXCollections.observableArrayList();
-        colName.setCellValueFactory(new PropertyValueFactory<Farmer, String>("name"));
-        colUsername.setCellValueFactory(new PropertyValueFactory<Farmer, String>("username"));
-        colPassword.setCellValueFactory(new PropertyValueFactory<Farmer, String>("pw"));
-        colLocation.setCellValueFactory(new PropertyValueFactory<Farmer, String>("location"));
-        colFavCrop.setCellValueFactory(new PropertyValueFactory<Farmer, String>("favoriteCrop"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
+        colPassword.setCellValueFactory(new PropertyValueFactory<>("pw"));
+        colLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
+        colFavCrop.setCellValueFactory(new PropertyValueFactory<>("favoriteCrop"));
 
         db.addChildEventListener(new ChildEventListener() {
             @Override
@@ -153,28 +153,11 @@ public class AdminFormFarmerController implements Initializable {
     public void logoutPressed(ActionEvent event) throws IOException {
 
         loadWindow(event, "LoginForm.fxml");
-//        System.out.println("Login Successful");
-//        Parent adminFormParent = FXMLLoader.load(getClass().getResource("LoginForm.fxml"));
-//        Scene adminFormScene= new Scene(adminFormParent);
-//
-//        //This line gets the Stage information
-//        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        window.setResizable(false);
-//        window.setScene(adminFormScene);
-//        window.show();
     }
 
 
     public void adminPressed(ActionEvent event) throws IOException {
         loadWindow(event, "AdminFormAdmin.fxml");
-//        Parent adminFormParent = FXMLLoader.load(getClass().getResource("LoginForm.fxml"));
-//        Scene adminFormScene= new Scene(adminFormParent);
-//
-//        //This line gets the Stage information
-//        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        window.setResizable(false);
-//        window.setScene(adminFormScene);
-//        window.show();
     }
 
     private void loadWindow(ActionEvent event, String name) throws IOException {

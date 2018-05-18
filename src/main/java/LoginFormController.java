@@ -63,8 +63,7 @@ public class LoginFormController implements Initializable {
                     if (snapshot.getValue() != null) {
                         for (DataSnapshot snap : snapshot.getChildren()) {
                             userExists = true;
-                            Admin admin = snap.getValue(Admin.class);
-                            currentAdmin = admin;
+                            currentAdmin = snap.getValue(Admin.class);
                         }
                     } else {
                         userExists = false;

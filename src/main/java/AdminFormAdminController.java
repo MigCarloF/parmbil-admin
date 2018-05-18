@@ -15,8 +15,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -47,12 +45,12 @@ public class AdminFormAdminController implements Initializable {
         initTable();
     }
 
-    public void initTable(){
+    private void initTable(){
 
         admins = FXCollections.observableArrayList();
-        colName.setCellValueFactory(new PropertyValueFactory<Admin, String>("name"));
-        colUsername.setCellValueFactory(new PropertyValueFactory<Admin, String>("username"));
-        colActive.setCellValueFactory(new PropertyValueFactory<Admin, String>("active"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
+        colActive.setCellValueFactory(new PropertyValueFactory<>("active"));
 
         System.out.println("ne");
         db.addChildEventListener(new ChildEventListener() {
