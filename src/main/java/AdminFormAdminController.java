@@ -23,8 +23,8 @@ import java.util.ResourceBundle;
 
 public class AdminFormAdminController implements Initializable {
 
-    DatabaseReference db;
-    ObservableList<Admin> admins;
+    private DatabaseReference db;
+    private ObservableList<Admin> admins;
 
     @FXML
     private TableView<Admin> tableAdmin;

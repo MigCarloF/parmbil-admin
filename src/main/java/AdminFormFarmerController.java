@@ -24,8 +24,8 @@ import java.util.ResourceBundle;
 
 public class AdminFormFarmerController implements Initializable {
 
-    DatabaseReference db;
-    ObservableList<Farmer> farmers;
+    private DatabaseReference db;
+    private ObservableList<Farmer> farmers;
 
     @FXML
     private TableView<Farmer> tableFarmer;

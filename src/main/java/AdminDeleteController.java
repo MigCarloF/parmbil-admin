@@ -13,8 +13,8 @@ import java.util.ResourceBundle;
 
 public class AdminDeleteController implements Initializable {
 
-    DatabaseReference db;
-    Admin adminToDelete;
+    private DatabaseReference db;
+    private Admin adminToDelete;
 
     @FXML
     private Button btnOk;

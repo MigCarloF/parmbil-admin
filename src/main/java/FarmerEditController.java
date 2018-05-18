@@ -15,9 +15,9 @@ import java.util.ResourceBundle;
 
 public class FarmerEditController implements Initializable {
 
-    Farmer farmerToEdit;
+    private Farmer farmerToEdit;
 
-    DatabaseReference db;
+    private DatabaseReference db;
 
     @FXML
     private TextField textUsername;

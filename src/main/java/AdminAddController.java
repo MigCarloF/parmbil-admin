@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdminAddController implements Initializable {
-    DatabaseReference db;
+    private DatabaseReference db;
 
     @FXML
     private TextField textUsername;
