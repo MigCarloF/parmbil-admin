@@ -64,14 +64,10 @@ public class LoginFormController implements Initializable {
                         for (DataSnapshot snap : snapshot.getChildren()) {
                             userExists = true;
                             Admin admin = snap.getValue(Admin.class);
-//                        System.out.println(admin.getUsername());
-//                        System.out.println(admin.getPassword());
-//                        System.out.println(admin.getName());
                             currentAdmin = admin;
                         }
                     } else {
                         userExists = false;
-                        System.out.println("NO :(");
                     }
                     cond.signal();
                     lock.unlock();
@@ -97,7 +93,8 @@ public class LoginFormController implements Initializable {
 
             //compares currentAdmin from the listener a while ago
             if (currentAdmin != null) {
-                if (currentAdmin.getUsername().equals(username.getText()) && currentAdmin.getPassword().equals(password.getText()) && currentAdmin.getActive()) {
+                if (currentAdmin.getUsername().equals(username.getText()) &&
+                        currentAdmin.getPassword().equals(password.getText()) && currentAdmin.getActive()) {
                     loginSuccessful = true;
                 }
             }

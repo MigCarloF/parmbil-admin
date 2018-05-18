@@ -34,6 +34,7 @@ public class Main extends Application {
 //        primaryStage.show();
 
         //setupGuy();
+        setupGuy2();
     }
 
     private void setupGuy() {
@@ -45,5 +46,14 @@ public class Main extends Application {
         Map<String, Object> updates = new HashMap<>();
         updates.put("pw","joker2");
         farmerRef.child("koreantol").updateChildren(updates);
+    }
+
+    private void setupGuy2() {
+        System.out.println("1");
+        DatabaseReference db;
+        db = FirebaseDatabase.getInstance().getReference();
+        //DatabaseReference farmerRef = db;
+        DatabaseReference farmerRef = db.child("Farmers");
+        farmerRef.child("koreantol").setValue(null);
     }
 }

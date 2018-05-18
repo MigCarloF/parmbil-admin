@@ -32,7 +32,7 @@
             <Button fx:id="btnFarmers" mnemonicParsing="false" prefHeight="32.0" prefWidth="158.0" text="Farmers" />
             <Button fx:id="btnFarmerAdd" mnemonicParsing="false" onAction="#addPressed" prefHeight="25.0" prefWidth="82.0" text="Add" />
             <Button fx:id="btnFarmerEdit" mnemonicParsing="false" onAction="#editPressed" prefHeight="25.0" prefWidth="82.0" text="Edit" />
-            <Button fx:id="btnFarmerDelete" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Delete" />
+            <Button fx:id="btnFarmerDelete" mnemonicParsing="false" onAction="#deletePressed" prefHeight="25.0" prefWidth="82.0" text="Delete" />
             <Button fx:id="btnAdmin" mnemonicParsing="false" onAction="#adminPressed" prefHeight="32.0" prefWidth="158.0" text="Admin" />
             <Button fx:id="btnAdminAdd" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Add" />
             <Button fx:id="btnAdminEdit" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Edit" />

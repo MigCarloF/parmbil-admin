@@ -1,11 +1,11 @@
 import java.util.StringTokenizer;
 
 public class Admin {
-    public boolean active;
-    public boolean master;
-    public String name;
-    public String password;
-    public String username;
+    private boolean active;
+    private boolean master;
+    private String name;
+    private String password;
+    private String username;
 
     public Admin(boolean active, boolean master, String name, String password, String username){
         this.active = active;

@@ -1,4 +1,5 @@
 import com.google.firebase.database.*;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -48,7 +49,7 @@ public class AdminFormFarmerController implements Initializable {
         db = FirebaseDatabase.getInstance().getReference().child("Farmers");
         lblUser.setText("");
         if (SingletonLogin.getInstance().getCurrentLogin() != null) {
-            lblUser.setText(SingletonLogin.getInstance().getCurrentLogin().name);
+            lblUser.setText(SingletonLogin.getInstance().getCurrentLogin().getName());
         }
         initTable();
 
@@ -62,7 +63,6 @@ public class AdminFormFarmerController implements Initializable {
         colLocation.setCellValueFactory(new PropertyValueFactory<Farmer, String>("location"));
         colFavCrop.setCellValueFactory(new PropertyValueFactory<Farmer, String>("favoriteCrop"));
 
-        System.out.println("ne");
         db.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChildName) {
@@ -95,7 +95,7 @@ public class AdminFormFarmerController implements Initializable {
 
     public void editPressed(ActionEvent event) throws IOException {
         if (tableFarmer.getSelectionModel().getSelectedCells().isEmpty()) {
-            System.out.println("No farmer selected!");
+            System.out.println(SingletonLogin.getInstance().getCurrentLogin().getName());
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("No farmer selected.");
@@ -128,6 +128,28 @@ public class AdminFormFarmerController implements Initializable {
         window.showAndWait();
     }
 
+    public void deletePressed(ActionEvent  event) throws  IOException {
+        if (tableFarmer.getSelectionModel().getSelectedCells().isEmpty()) {
+            System.out.println("No farmer selected!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No farmer selected.");
+            alert.setContentText("Please select a farmer profile to delete.");
+            alert.showAndWait();
+        } else{
+            Stage window = new Stage();
+            Farmer editFarmer = tableFarmer.getSelectionModel().getSelectedItem();
+            SingletonEditFarmer.getInstance().setFarmer(editFarmer);
+
+            FXMLLoader anotherLoader = new FXMLLoader(getClass().getResource("FarmerDelete.fxml"));
+            Parent anotherRoot = anotherLoader.load();
+            Scene anotherScene = new Scene(anotherRoot);
+            window.setResizable(false);
+            window.initModality(Modality.APPLICATION_MODAL);
+            window.setScene(anotherScene);
+            window.showAndWait();
+        }
+    }
     public void logoutPressed(ActionEvent event) throws IOException {
 
         loadWindow(event, "LoginForm.fxml");
